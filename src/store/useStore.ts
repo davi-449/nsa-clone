@@ -2,6 +2,7 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
 export interface StudentData {
+  nome: string
   habilitacao: string
   rm: string
   semestre_oc: string
@@ -24,6 +25,7 @@ export const useStore = create<StudentState>()(
   persist(
     (set) => ({
       data: {
+        nome: 'ALUNO DEMONSTRAÇÃO',
         habilitacao: 'TÉCNICO EM PROGRAMAÇÃO DE JOGOS DIGITAIS',
         rm: '260948',
         semestre_oc: '1º SEMESTRE',

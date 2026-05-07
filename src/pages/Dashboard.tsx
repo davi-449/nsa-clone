@@ -92,6 +92,7 @@ export function Dashboard() {
           />
         </div>
 
+        <div className="mb-1"><span className="font-semibold">Nome: </span><span className="font-bold">{data.nome}</span></div>
         <div className="mb-1"><span className="font-semibold">RM: </span><span className="font-bold">{data.rm}</span></div>
         <div className="mb-1"><span className="font-semibold">Semestre OC: </span><span className="font-bold">{data.semestre_oc}</span>  <span className="font-semibold ml-2">Ano OC: </span><span className="font-bold">{data.ano_oc}</span></div>
         <div className="mb-1"><span className="font-semibold">Módulo/Série Atual: </span><span className="font-bold">{data.modulo_atual}</span></div>

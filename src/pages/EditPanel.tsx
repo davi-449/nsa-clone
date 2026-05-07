@@ -40,6 +40,16 @@ export function EditPanel() {
         <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 space-y-4">
           
           <div className="space-y-1">
+            <label className="text-xs font-bold text-gray-500 uppercase">Nome</label>
+            <input 
+              name="nome"
+              value={formData.nome}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded p-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
+            />
+          </div>
+
+          <div className="space-y-1">
             <label className="text-xs font-bold text-gray-500 uppercase">Habilitação</label>
             <input 
               name="habilitacao"
