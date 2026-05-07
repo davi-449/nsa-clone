@@ -92,14 +92,14 @@ export function Dashboard() {
           />
         </div>
 
-        <div className="mb-1"><span className="font-semibold">Nome: </span><span className="font-bold">{data.nome}</span></div>
-        <div className="mb-1"><span className="font-semibold">RM: </span><span className="font-bold">{data.rm}</span></div>
-        <div className="mb-1"><span className="font-semibold">Semestre OC: </span><span className="font-bold">{data.semestre_oc}</span>  <span className="font-semibold ml-2">Ano OC: </span><span className="font-bold">{data.ano_oc}</span></div>
-        <div className="mb-1"><span className="font-semibold">Módulo/Série Atual: </span><span className="font-bold">{data.modulo_atual}</span></div>
-        <div className="mb-1"><span className="font-semibold">Turma: </span><span className="font-bold">{data.turma}</span></div>
-        <div className="mb-1"><span className="font-semibold">Grupo do Componente: </span><span className="font-bold">{data.grupo_componente}</span></div>
-        <div className="mb-1"><span className="font-semibold">Situação da Matrícula: </span><span className="font-bold">{data.situacao_matricula}</span></div>
-        <div className="mb-1"><span className="font-semibold">Data da situação: </span><span className="font-bold">{data.data_situacao}</span></div>
+        <div className="mb-1"><span>Nome: </span><span className="font-bold">{data.nome}</span></div>
+        <div className="mb-1"><span>RM: </span><span className="font-bold">{data.rm}</span></div>
+        <div className="mb-1"><span>Semestre OC: </span><span className="font-bold">{data.semestre_oc}</span>  <span className="ml-2">Ano OC: </span><span className="font-bold">{data.ano_oc}</span></div>
+        <div className="mb-1"><span>Módulo/Série Atual: </span><span className="font-bold">{data.modulo_atual}</span></div>
+        <div className="mb-1"><span>Turma: </span><span className="font-bold">{data.turma}</span></div>
+        <div className="mb-1"><span>Grupo do Componente: </span><span className="font-bold">{data.grupo_componente}</span></div>
+        <div className="mb-1"><span>Situação da Matrícula: </span><span className="font-bold">{data.situacao_matricula}</span></div>
+        <div className="mb-1"><span>Data da situação: </span><span className="font-bold">{data.data_situacao}</span></div>
         <div className="clear-both"></div>
       </div>
 
