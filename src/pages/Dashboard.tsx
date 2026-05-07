@@ -1,21 +1,44 @@
 import { useStore } from '../store/useStore'
 import { useNavigate } from 'react-router-dom'
-import { Camera, Calendar, Mail, FileText, Image, LayoutDashboard, LogIn } from 'lucide-react'
-import { useRef } from 'react'
+import { Camera, Calendar, Mail, FileText, Image, LayoutDashboard, LogIn, Check, X } from 'lucide-react'
+import { useRef, useState, useCallback } from 'react'
+import Cropper from 'react-easy-crop'
+import { getCroppedImg } from '../utils/cropImage'
 
 export function Dashboard() {
   const { data, setPhoto } = useStore()
   const navigate = useNavigate()
   const fileInputRef = useRef<HTMLInputElement>(null)
 
+  // Crop states
+  const [imageSrc, setImageSrc] = useState<string | null>(null)
+  const [crop, setCrop] = useState({ x: 0, y: 0 })
+  const [zoom, setZoom] = useState(1)
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState<any>(null)
+
   const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (file) {
       const reader = new FileReader()
       reader.onloadend = () => {
-        setPhoto(reader.result as string)
+        setImageSrc(reader.result as string)
       }
       reader.readAsDataURL(file)
+    }
+  }
+
+  const onCropComplete = useCallback((_croppedArea: any, croppedAreaPixels: any) => {
+    setCroppedAreaPixels(croppedAreaPixels)
+  }, [])
+
+  const saveCroppedImage = async () => {
+    try {
+      if (!imageSrc || !croppedAreaPixels) return
+      const croppedImageBase64 = await getCroppedImg(imageSrc, croppedAreaPixels, 0)
+      setPhoto(croppedImageBase64)
+      setImageSrc(null) // Close modal
+    } catch (e) {
+      console.error(e)
     }
   }
 
@@ -56,9 +79,9 @@ export function Dashboard() {
           <div><span className="font-semibold">Data da situação: </span><span className="font-bold">{data.data_situacao}</span></div>
         </div>
         
-        {/* Photo Upload Area */}
+        {/* Photo Upload Area (Removed dashed borders per user request) */}
         <div 
-          className="w-24 h-24 border-2 border-dashed border-gray-400 rounded-xl flex flex-col items-center justify-center cursor-pointer bg-gray-50 hover:bg-gray-100 overflow-hidden shrink-0 mt-1 mr-1"
+          className="w-24 h-24 rounded-xl flex flex-col items-center justify-center cursor-pointer bg-gray-100 hover:bg-gray-200 overflow-hidden shrink-0 mt-1 mr-1"
           onClick={() => fileInputRef.current?.click()}
         >
           {data.photoBase64 ? (
@@ -97,6 +120,41 @@ export function Dashboard() {
           </button>
         ))}
       </div>
+
+      {/* Crop Modal */}
+      {imageSrc && (
+        <div className="fixed inset-0 z-50 bg-black flex flex-col">
+          <div className="flex-1 relative">
+            <Cropper
+              image={imageSrc}
+              crop={crop}
+              zoom={zoom}
+              aspect={1}
+              onCropChange={setCrop}
+              onCropComplete={onCropComplete}
+              onZoomChange={setZoom}
+            />
+          </div>
+          <div className="h-20 bg-black/90 text-white flex items-center justify-around px-4">
+            <button 
+              onClick={() => {
+                setImageSrc(null)
+                if (fileInputRef.current) fileInputRef.current.value = ''
+              }}
+              className="p-3 bg-red-600 rounded-full"
+            >
+              <X className="w-6 h-6" />
+            </button>
+            <span className="text-sm font-medium">Ajuste a Foto (1:1)</span>
+            <button 
+              onClick={saveCroppedImage}
+              className="p-3 bg-green-600 rounded-full"
+            >
+              <Check className="w-6 h-6" />
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
