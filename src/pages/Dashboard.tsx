@@ -68,28 +68,19 @@ export function Dashboard() {
       <div className="text-center font-bold text-[13px] tracking-wide mt-2 mb-1">
         DADOS DA CLASSE SELECIONADA
       </div>
-      <div className="bg-white border border-black rounded-md p-3 pb-4 shadow-sm flex gap-3">
-        <div className="flex-1 flex flex-col gap-1 text-[14.5px]">
-          <div><span className="font-semibold">RM: </span><span className="font-bold">{data.rm}</span></div>
-          <div><span className="font-semibold">Semestre OC: </span><span className="font-bold">{data.semestre_oc}</span>  <span className="font-semibold ml-2">Ano OC: </span><span className="font-bold">{data.ano_oc}</span></div>
-          <div><span className="font-semibold">Módulo/Série Atual: </span><span className="font-bold">{data.modulo_atual}</span></div>
-          <div><span className="font-semibold">Turma: </span><span className="font-bold">{data.turma}</span></div>
-          <div><span className="font-semibold">Grupo do Componente: </span><span className="font-bold">{data.grupo_componente}</span></div>
-          <div><span className="font-semibold">Situação da Matrícula: </span><span className="font-bold">{data.situacao_matricula}</span></div>
-          <div><span className="font-semibold">Data da situação: </span><span className="font-bold">{data.data_situacao}</span></div>
-        </div>
+      <div className="bg-white border border-black rounded-md p-3 pb-4 shadow-sm text-[13.5px] leading-snug">
         
-        {/* Photo Upload Area (Removed dashed borders per user request) */}
+        {/* Photo Upload Area - Floated Right */}
         <div 
-          className="w-24 h-24 rounded-xl flex flex-col items-center justify-center cursor-pointer bg-gray-100 hover:bg-gray-200 overflow-hidden shrink-0 mt-1 mr-1"
+          className="float-right w-20 h-24 rounded-xl flex flex-col items-center justify-center cursor-pointer bg-gray-100 hover:bg-gray-200 overflow-hidden ml-3 mb-1"
           onClick={() => fileInputRef.current?.click()}
         >
           {data.photoBase64 ? (
             <img src={data.photoBase64} alt="Foto do aluno" className="w-full h-full object-cover" />
           ) : (
             <>
-              <Image className="w-8 h-8 text-gray-400 mb-1" />
-              <span className="text-[10px] text-gray-500 font-medium">Add Foto</span>
+              <Image className="w-6 h-6 text-gray-400 mb-1" />
+              <span className="text-[10px] text-gray-500 font-medium text-center leading-tight">Add Foto</span>
             </>
           )}
           <input 
@@ -100,6 +91,15 @@ export function Dashboard() {
             className="hidden" 
           />
         </div>
+
+        <div className="mb-1"><span className="font-semibold">RM: </span><span className="font-bold">{data.rm}</span></div>
+        <div className="mb-1"><span className="font-semibold">Semestre OC: </span><span className="font-bold">{data.semestre_oc}</span>  <span className="font-semibold ml-2">Ano OC: </span><span className="font-bold">{data.ano_oc}</span></div>
+        <div className="mb-1"><span className="font-semibold">Módulo/Série Atual: </span><span className="font-bold">{data.modulo_atual}</span></div>
+        <div className="mb-1"><span className="font-semibold">Turma: </span><span className="font-bold">{data.turma}</span></div>
+        <div className="mb-1"><span className="font-semibold">Grupo do Componente: </span><span className="font-bold">{data.grupo_componente}</span></div>
+        <div className="mb-1"><span className="font-semibold">Situação da Matrícula: </span><span className="font-bold">{data.situacao_matricula}</span></div>
+        <div className="mb-1"><span className="font-semibold">Data da situação: </span><span className="font-bold">{data.data_situacao}</span></div>
+        <div className="clear-both"></div>
       </div>
 
       {/* Grid Navigation */}
